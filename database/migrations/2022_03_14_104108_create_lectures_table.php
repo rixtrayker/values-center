@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,6 +14,10 @@ return new class extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('teacher_id')->nullable()->constrained();
+            $table->foreignId('course_trial_id')->nullable()->constrained();
+            $table->tinyInteger('session_number');
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
