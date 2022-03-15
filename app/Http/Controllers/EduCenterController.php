@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EduCenter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EduCenterController extends Controller
 {
@@ -14,7 +15,10 @@ class EduCenterController extends Controller
      */
     public function index()
     {
-        //
+        $records = EduCenter::latest()->paginate(5);
+        return view('educenters.index', compact('records'));
+        // return view('products.index', compact('products'))
+        //     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +28,7 @@ class EduCenterController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -35,7 +39,16 @@ class EduCenterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:edu_centers,name',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        EduCenter::create($request->all());
     }
 
     /**
@@ -69,7 +82,24 @@ class EduCenterController extends Controller
      */
     public function update(Request $request, EduCenter $eduCenter)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:edu_centers,name,'.$id,
+        ], []);
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        // $request->validate([
+        //     'name' => 'required',
+        //     'detail' => 'required',
+        // ]);
+
+        $eduCenter->update($request->all());
+        // $record = EduCenter::findOrFail($id);
+        // $record->update(($request->all()));
+        return redirect()->route('educenters.index');
     }
 
     /**
