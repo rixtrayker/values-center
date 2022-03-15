@@ -22,8 +22,10 @@ return new class extends Migration {
             $table->foreignId('paid_for')->nullable()->constrained('users');
             $table->foreignId('student_course_id')->nullable()->constrained();
             $table->foreignId('edu_center_id')->nullable()->constrained();
+            $table->boolean('is_vodafone')->default(0);
+            $table->boolean('is_vf_trans')->default(0);
             $table->foreignId('registration_id')->nullable()->constrained();
-            $table->tinyInteger('state'); // 0 pending 1 done 2 refunded
+            $table->tinyInteger('status'); // 0 pending 1 done 2 refunded
             $table->timestamps();
         });
     }

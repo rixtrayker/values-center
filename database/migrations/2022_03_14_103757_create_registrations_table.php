@@ -16,9 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->string('serial');
             $table->string('test_center');
+            $table->foreignId('student_id')->constrained();
             $table->foreignId('center_id')->nullable()->constrained();
             $table->foreignId('edu_center_id')->nullable()->constrained();
-            $table->tinyInteger('state'); // 0 booked 1 paid 2 booked and paid
+            $table->tinyInteger('status'); // 0 booked 1 paid 2 booked and paid
             $table->timestamps();
         });
     }

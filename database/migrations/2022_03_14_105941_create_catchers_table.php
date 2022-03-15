@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('notes')->nullable(); // before
             $table->string('comment')->nullable(); // after
              // 0 nothing 1 processing 2 completed 3 failed
-            $table->tinyInteger('state')->default(0);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
