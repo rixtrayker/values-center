@@ -28,7 +28,7 @@ class EduCenterController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('educenters.create');
     }
 
     /**
@@ -49,6 +49,7 @@ class EduCenterController extends Controller
                     ->withInput();
         }
         EduCenter::create($request->all());
+        return redirect()->route('educenters.index');
     }
 
     /**
@@ -59,7 +60,7 @@ class EduCenterController extends Controller
      */
     public function show(EduCenter $eduCenter)
     {
-        //
+        return view('educenters.show', compact('eduCenter'));
     }
 
     /**
@@ -70,7 +71,7 @@ class EduCenterController extends Controller
      */
     public function edit(EduCenter $eduCenter)
     {
-        //
+        return view('educenters.edit', compact('eduCenter'));
     }
 
     /**
@@ -110,6 +111,7 @@ class EduCenterController extends Controller
      */
     public function destroy(EduCenter $eduCenter)
     {
-        //
+        $eduCenter->delete();
+        return redirect()->route('educenters.index');
     }
 }

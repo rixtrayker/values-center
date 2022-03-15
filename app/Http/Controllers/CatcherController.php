@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catcher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CatcherController extends Controller
 {
@@ -14,7 +15,8 @@ class CatcherController extends Controller
      */
     public function index()
     {
-        //
+        $records = EduCenter::all();
+        return view('catchers.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CatcherController extends Controller
      */
     public function create()
     {
-        //
+        return view('catchers.create');
     }
 
     /**
@@ -35,7 +37,24 @@ class CatcherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request['serial'] =
+        $validator = Validator::make($request->all(), [
+            'serial' => 'required',
+            'name' => 'required|string|unique:edu_centers,name',
+            'serial' => 'required',
+            'admin_name' => 'required',
+            'student_name' => 'required',
+            'phone_number' => 'required',
+            'notes' => 'required',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Catcher::create($request->all());
+        return redirect()->route('catchers.index');
     }
 
     /**
@@ -46,7 +65,7 @@ class CatcherController extends Controller
      */
     public function show(Catcher $catcher)
     {
-        //
+        return view('catchers.show', compact('catcher'));
     }
 
     /**
@@ -57,7 +76,7 @@ class CatcherController extends Controller
      */
     public function edit(Catcher $catcher)
     {
-        //
+        return view('catchers.edit', compact('catcher'));
     }
 
     /**
@@ -69,7 +88,25 @@ class CatcherController extends Controller
      */
     public function update(Request $request, Catcher $catcher)
     {
-        //
+        if ($request->serial) {
+            $request->remove('serial');
+        }
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:edu_centers,name',
+            'serial' => 'required',
+            'admin_name' => 'required',
+            'student_name' => 'required',
+            'phone_number' => 'required',
+            'notes' => 'required'
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $catcher->update($request->all());
+        return redirect()->route('catchers.index');
     }
 
     /**
@@ -80,6 +117,7 @@ class CatcherController extends Controller
      */
     public function destroy(Catcher $catcher)
     {
-        //
+        $catcher->delete();
+        return redirect()->route('catchers.index');
     }
 }
