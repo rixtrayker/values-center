@@ -12,4 +12,9 @@ class Catcher extends Model
     public static $PROCESSING = 1;
     public static $COMPLETED = 2;
     public static $FAILED = 3;
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

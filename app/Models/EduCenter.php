@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class EduCenter extends Model
 {
     use HasFactory;
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+    public function authenticates()
+    {
+        return $this->hasMany(Authenticates::class);
+    }
 }
