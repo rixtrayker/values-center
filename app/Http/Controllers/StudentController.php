@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
@@ -14,7 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $records = Student::all();
+        return view('students.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request['serial'] =
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'serial' => 'required|string',
+            'mobile' => 'required',
+            'grade' => 'string|nullable',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Student::create($request->all());
+        return redirect()->route('students.index');
     }
 
     /**
@@ -46,7 +63,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('students.show', compact('student'));
     }
 
     /**
@@ -57,7 +74,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -69,7 +86,22 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        if ($request->serial) {
+            $request->remove('serial');
+        }
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'mobile' => 'required',
+            'grade' => 'string|nullable',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Student::create($request->all());
+        return redirect()->route('students.index');
     }
 
     /**
@@ -80,6 +112,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('students.index');
     }
 }

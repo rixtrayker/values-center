@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('serial');
             $table->string('student_name');
-            $table->string('phone_number');
+            $table->string('mobile');
             $table->string('admin_name');
             $table->string('notes')->nullable(); // before
             $table->string('comment')->nullable(); // after

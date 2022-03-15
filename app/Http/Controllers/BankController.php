@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bank;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BankController extends Controller
 {
@@ -14,7 +15,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        //
+        $records = Bank::all();
+        return view('banks.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        //
+        return view('banks.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:banks,name',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Bank::create($request->all());
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -46,7 +58,7 @@ class BankController extends Controller
      */
     public function show(Bank $bank)
     {
-        //
+        return view('banks.show', compact('bank'));
     }
 
     /**
@@ -57,7 +69,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        //
+        return view('banks.edit', compact('bank'));
     }
 
     /**
@@ -69,7 +81,16 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:banks,name,'.$id,
+        ], []);
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $banks->update($request->all());
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -80,6 +101,7 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        //
+        $bank->delete();
+        return redirect()->route('banks.index');
     }
 }

@@ -15,7 +15,7 @@ class CatcherController extends Controller
      */
     public function index()
     {
-        $records = EduCenter::all();
+        $records = Catcher::all();
         return view('catchers.index', compact('records'));
     }
 
@@ -40,11 +40,11 @@ class CatcherController extends Controller
         // $request['serial'] =
         $validator = Validator::make($request->all(), [
             'serial' => 'required',
-            'name' => 'required|string|unique:edu_centers,name',
+            'name' => 'required|string',
             'serial' => 'required',
             'admin_name' => 'required',
             'student_name' => 'required',
-            'phone_number' => 'required',
+            'mobile' => 'required',
             'notes' => 'required',
         ], []);
 
@@ -92,11 +92,11 @@ class CatcherController extends Controller
             $request->remove('serial');
         }
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:edu_centers,name',
+            'name' => 'required|string',
             'serial' => 'required',
             'admin_name' => 'required',
             'student_name' => 'required',
-            'phone_number' => 'required',
+            'mobile' => 'required',
             'notes' => 'required'
         ], []);
 
