@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
@@ -14,7 +15,8 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        //
+        $records = Registration::all();
+        return view('registrations.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        //
+        return view('registrations.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request['serial'] =
+        $validator = Validator::make($request->all(), [
+            'serial' => 'required|string',
+            'test_center' => 'required|string',
+            'student_id' => 'required|exists:students,id',
+            'edu_center_id' => 'required|exists:edu_centers,id',
+            'status' => 'required|integer',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Registration::create($request->all());
+        return redirect()->route('registrations.index');
     }
 
     /**
@@ -46,7 +63,7 @@ class RegistrationController extends Controller
      */
     public function show(Registration $registration)
     {
-        //
+        return view('registrations.show', compact('registration'));
     }
 
     /**
@@ -57,7 +74,7 @@ class RegistrationController extends Controller
      */
     public function edit(Registration $registration)
     {
-        //
+        return view('registrations.edit', compact('registration'));
     }
 
     /**
@@ -69,7 +86,24 @@ class RegistrationController extends Controller
      */
     public function update(Request $request, Registration $registration)
     {
-        //
+        if ($request->serial) {
+            $request->remove('serial');
+        }
+        $validator = Validator::make($request->all(), [
+            'serial' => 'required|string',
+            'test_center' => 'required|string',
+            'student_id' => 'required|exists:students,id',
+            'edu_center_id' => 'required|exists:edu_centers,id',
+            'status' => 'required|integer',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $registration->update($request->all());
+        return redirect()->route('registrations.index');
     }
 
     /**
@@ -80,6 +114,7 @@ class RegistrationController extends Controller
      */
     public function destroy(Registration $registration)
     {
-        //
+        $registration->delete();
+        return redirect()->route('registrations.index');
     }
 }

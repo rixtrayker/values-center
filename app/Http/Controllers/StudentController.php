@@ -100,7 +100,7 @@ class StudentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Student::create($request->all());
+        $student->update($request->all());
         return redirect()->route('students.index');
     }
 

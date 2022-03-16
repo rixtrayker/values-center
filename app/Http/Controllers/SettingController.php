@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -14,7 +15,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $records = Setting::all();
+        return view('settings.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        return view('settings.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Setting::create($request->all());
+        return redirect()->route('settings.index');
     }
 
     /**
@@ -46,7 +58,7 @@ class SettingController extends Controller
      */
     public function show(Setting $setting)
     {
-        //
+        return view('settings.show', compact('setting'));
     }
 
     /**
@@ -57,7 +69,7 @@ class SettingController extends Controller
      */
     public function edit(Setting $setting)
     {
-        //
+        return view('settings.edit', compact('setting'));
     }
 
     /**
@@ -69,7 +81,17 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $setting->update($request->all());
+        return redirect()->route('settings.index');
     }
 
     /**
@@ -80,6 +102,7 @@ class SettingController extends Controller
      */
     public function destroy(Setting $setting)
     {
-        //
+        $setting->delete();
+        return redirect()->route('settings.index');
     }
 }
