@@ -32,11 +32,16 @@ class Student extends Model
 
     public function lectures()
     {
-        return $this->hasMany(Lecture::class);
+        return $this->belongsToMany(Lecture::class);
     }
 
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function attendedLectures()
+    {
+        return $this->belongsToMany(Lecture::class, 'attendances', 'student_id', 'lecture_id');
     }
 }

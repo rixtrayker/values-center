@@ -21,11 +21,16 @@ class Lecture extends Model
 
     public function students()
     {
-        return $this->belongToMany(Student::class);
+        return $this->belongsToMany(Student::class);
     }
 
     public function payments()
     {
-        return $this->belongToMany(Payment::class);
+        return $this->belongsToMany(Payment::class);
+    }
+
+    public function attendedStudents()
+    {
+        return $this->belongsToMany(Student::class, 'attendances', 'lecture_id', 'student_id');
     }
 }
