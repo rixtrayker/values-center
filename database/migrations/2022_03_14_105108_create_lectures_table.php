@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
             $table->foreignId('teacher_id')->nullable()->constrained();
-            $table->foreignId('course_trial_id')->nullable()->constrained();
+            $table->foreignId('course_group_id')->nullable()->constrained();
             $table->tinyInteger('session_number');
             $table->date('date')->nullable();
             $table->timestamps();
