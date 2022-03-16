@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Authenticates;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenticatesController extends Controller
 {
@@ -14,7 +15,8 @@ class AuthenticatesController extends Controller
      */
     public function index()
     {
-        //
+        $records = Authenticates::all();
+        return view('authenticates.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AuthenticatesController extends Controller
      */
     public function create()
     {
-        //
+        return view('authenticates.create');
     }
 
     /**
@@ -35,7 +37,27 @@ class AuthenticatesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'serial' => 'required|string',
+            'ACT1' => 'nullable|integer',
+            'ACT2' => 'nullable|integer',
+            'EST1' => 'nullable|integer',
+            'EST2' => 'nullable|integer',
+            'cost' => 'nullable|integer',
+            'paid' => 'nullable|integer',
+            'service' => 'nullable|integer',
+            'send_score_times' => 'required|integer',
+            'student_id' => 'required|exists:students,id',
+            'status' => 'required|integer',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Authenticates::create($request->all());
+        return redirect()->route('authenticates.index');
     }
 
     /**
@@ -46,7 +68,7 @@ class AuthenticatesController extends Controller
      */
     public function show(Authenticates $authenticates)
     {
-        //
+        return view('authenticates.show', compact('authenticates'));
     }
 
     /**
@@ -57,7 +79,7 @@ class AuthenticatesController extends Controller
      */
     public function edit(Authenticates $authenticates)
     {
-        //
+        return view('authenticates.edit', compact('authenticates'));
     }
 
     /**
@@ -69,7 +91,30 @@ class AuthenticatesController extends Controller
      */
     public function update(Request $request, Authenticates $authenticates)
     {
-        //
+        if ($request->serial) {
+            $request->remove('serial');
+        }
+        $validator = Validator::make($request->all(), [
+            'serial' => 'required|string',
+            'ACT1' => 'nullable|integer',
+            'ACT2' => 'nullable|integer',
+            'EST1' => 'nullable|integer',
+            'EST2' => 'nullable|integer',
+            'cost' => 'nullable|integer',
+            'paid' => 'nullable|integer',
+            'service' => 'nullable|integer',
+            'send_score_times' => 'required|integer',
+            'student_id' => 'required|exists:students,id',
+            'status' => 'required|integer',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $authenticates->update($request->all());
+        return redirect()->route('authenticates.index');
     }
 
     /**
@@ -80,6 +125,7 @@ class AuthenticatesController extends Controller
      */
     public function destroy(Authenticates $authenticates)
     {
-        //
+        $authenticates->delete();
+        return redirect()->route('authenticates.index');
     }
 }
