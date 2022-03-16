@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('mobile')->nullable();
             $table->string('comment')->nullable();
             $table->boolean('attended')->default(0);
+            $table->foreignId('student_id')->nullable()->constrained();
             $table->foreignId('lecture_id')->nullable()->constrained();
             $table->timestamps();
         });
