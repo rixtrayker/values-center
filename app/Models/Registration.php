@@ -11,15 +11,19 @@ class Registration extends Model
     public static $BOOKED = 0;
     public static $PAID = 1;
     public static $DONE = 2;
-    /**
-     * Get the student associated with the registration.
-     */
+
     public function student()
     {
         return $this->belongsTo(Student::class);
     }
+
     public function eduCenter()
     {
         return $this->belongsTo(EduCenter::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

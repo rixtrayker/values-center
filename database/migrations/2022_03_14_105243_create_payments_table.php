@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->string('paying_method'); // vc - bank - cash
             $table->foreignId('paid_for')->nullable()->constrained('users');
-            $table->foreignId('lecture_student_id')->nullable()->constrained('lecture_student');
+            $table->foreignId('student_id')->nullable()->constrained('lecture_student');
             $table->foreignId('edu_center_id')->nullable()->constrained();
             $table->boolean('is_vodafone')->default(0);
             $table->boolean('is_vf_trans')->default(0);

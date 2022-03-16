@@ -12,14 +12,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('lecture_payment', function (Blueprint $table) {
             $table->id();
-            $table->string('student_name')->nullable();
-            $table->string('mobile')->nullable();
-            $table->string('comment')->nullable();
-            $table->boolean('attended')->default(0);
-            $table->foreignId('student_id')->nullable()->constrained();
-            $table->foreignId('lecture_id')->nullable()->constrained();
+            $table->foreignId('lecture_id')->constrained();
+            $table->foreignId('payment_id')->constrained();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('lecture_payment');
     }
 };

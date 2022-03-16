@@ -29,4 +29,14 @@ class Student extends Model
     {
         return $this->belongsTo(EduCenter::class);
     }
+
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

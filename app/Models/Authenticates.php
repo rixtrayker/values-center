@@ -13,8 +13,14 @@ class Authenticates extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
     public function eduCenter()
     {
         return $this->belongsTo(EduCenter::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }
