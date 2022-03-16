@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('serial');
             $table->foreignId('payment_id')->nullable()->constrained();
             $table->string('image')->nullable();
-            $table->tinyInteger('state'); // 0 pending 1 done
+            $table->tinyInteger('status'); // 0 pending 1 done
             $table->timestamps();
         });
     }

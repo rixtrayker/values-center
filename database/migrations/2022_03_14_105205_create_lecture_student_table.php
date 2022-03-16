@@ -12,14 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('course_groups', function (Blueprint $table) {
+        Schema::create('lecture_student', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained();
-            $table->string('month')->nullable();
-            $table->integer('cost');
-            $table->date('start_date')->nullable();
-            $table->date('day_one')->nullable();
-            $table->date('day_two')->nullable();
+            $table->foreignId('student_id')->constrained();
+            $table->foreignId('lecture_id')->constrained();
+            $table->tinyInteger('status')->default(0);
+            // 0 nothing 1 alert to pay
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('course_groups');
+        Schema::dropIfExists('student_courses');
     }
 };
