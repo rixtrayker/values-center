@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AttendanceController extends Controller
 {
@@ -14,7 +15,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $records = Attendance::all();
+        return view('attendances.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('attendances.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Attendance::create($request->all());
+        return redirect()->route('attendances.index');
     }
 
     /**
@@ -46,7 +58,7 @@ class AttendanceController extends Controller
      */
     public function show(Attendance $attendance)
     {
-        //
+        return view('attendances.show', compact('attendance'));
     }
 
     /**
@@ -57,7 +69,7 @@ class AttendanceController extends Controller
      */
     public function edit(Attendance $attendance)
     {
-        //
+        return view('attendances.edit', compact('attendance'));
     }
 
     /**
@@ -69,7 +81,16 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+        ], []);
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $attendance->update($request->all());
+        return redirect()->route('attendances.index');
     }
 
     /**
@@ -80,6 +101,7 @@ class AttendanceController extends Controller
      */
     public function destroy(Attendance $attendance)
     {
-        //
+        $attendance->delete();
+        return redirect()->route('attendances.index');
     }
 }
