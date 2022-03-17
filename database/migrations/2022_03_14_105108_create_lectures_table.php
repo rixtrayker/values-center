@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->date('start_date')->nullable();
             $table->date('day_one')->nullable();
             $table->date('day_two')->nullable();
-            $table->tinyInteger('session_number');
+            $table->tinyInteger('number_of_sessions');
             $table->date('date')->nullable();
             $table->timestamps();
         });

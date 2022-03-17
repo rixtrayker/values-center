@@ -95,7 +95,7 @@ class AuthenticatesController extends Controller
             $request->remove('serial');
         }
         $validator = Validator::make($request->all(), [
-            'serial' => 'required|string',
+            // 'serial' => 'required|string',
             'ACT1' => 'nullable|integer',
             'ACT2' => 'nullable|integer',
             'EST1' => 'nullable|integer',

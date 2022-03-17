@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('serial');
             $table->string('reason');
             $table->integer('payment');
+            $table->integer('discount')->nullable();
             $table->string('image')->nullable();
             $table->string('paying_method'); // vc - bank - cash
             $table->foreignId('paid_for')->nullable()->constrained('users');

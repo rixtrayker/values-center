@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Refund;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RefundController extends Controller
 {
@@ -14,7 +15,8 @@ class RefundController extends Controller
      */
     public function index()
     {
-        //
+        $records = Refund::all();
+        return view('refunds.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class RefundController extends Controller
      */
     public function create()
     {
-        //
+        return view('refunds.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class RefundController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request['serial'] =
+
+        $validator = Validator::make($request->all(), [
+            'serial' => 'required|string',
+            'payment_id' => 'required|exists:payments,id',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+            'status' => 'integer|in:0,1',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Refund::create($request->all());
+        return redirect()->route('refunds.index');
     }
 
     /**
@@ -46,7 +63,7 @@ class RefundController extends Controller
      */
     public function show(Refund $refund)
     {
-        //
+        return view('refunds.show', compact('refund'));
     }
 
     /**
@@ -57,7 +74,7 @@ class RefundController extends Controller
      */
     public function edit(Refund $refund)
     {
-        //
+        return view('refunds.edit', compact('refund'));
     }
 
     /**
@@ -69,7 +86,22 @@ class RefundController extends Controller
      */
     public function update(Request $request, Refund $refund)
     {
-        //
+        if ($request->serial) {
+            $request->remove('serial');
+        }
+        $validator = Validator::make($request->all(), [
+            'payment_id' => 'required|exists:payments,id',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+            'status' => 'integer|in:0,1',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $refund->update($request->all());
+        return redirect()->route('refunds.index');
     }
 
     /**
@@ -80,6 +112,7 @@ class RefundController extends Controller
      */
     public function destroy(Refund $refund)
     {
-        //
+        $refund->delete();
+        return redirect()->route('refunds.index');
     }
 }

@@ -90,7 +90,7 @@ class RegistrationController extends Controller
             $request->remove('serial');
         }
         $validator = Validator::make($request->all(), [
-            'serial' => 'required|string',
+            // 'serial' => 'required|string',
             'test_center' => 'required|string',
             'student_id' => 'required|exists:students,id',
             'edu_center_id' => 'required|exists:edu_centers,id',

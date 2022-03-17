@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LectureController extends Controller
 {
@@ -14,7 +15,8 @@ class LectureController extends Controller
      */
     public function index()
     {
-        //
+        $records = Lecture::all();
+        return view('lectures.index', compact('records'));
     }
 
     /**
@@ -24,7 +26,7 @@ class LectureController extends Controller
      */
     public function create()
     {
-        //
+        return view('lectures.create');
     }
 
     /**
@@ -35,7 +37,25 @@ class LectureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'teacher_id' => 'nullable|exists:teachers,id',
+            'course_id' => 'required|exists:courses,id',
+            'month' => 'nullable|string',
+            'cost' => 'required|integer',
+            'number_of_sessions' => 'required|integer',
+            'start_date' => 'nullable|date',
+            'day_one' => 'nullable|date',
+            'day_two' => 'nullable|date',
+            'date' => 'nullable|date',
+        ], []);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Lecture::create($request->all());
+        return redirect()->route('lectures.index');
     }
 
     /**
@@ -46,7 +66,7 @@ class LectureController extends Controller
      */
     public function show(Lecture $lecture)
     {
-        //
+        return view('lectures.show', compact('lecture'));
     }
 
     /**
@@ -57,7 +77,7 @@ class LectureController extends Controller
      */
     public function edit(Lecture $lecture)
     {
-        //
+        return view('lectures.edit', compact('lecture'));
     }
 
     /**
@@ -69,7 +89,24 @@ class LectureController extends Controller
      */
     public function update(Request $request, Lecture $lecture)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'teacher_id' => 'nullable|exists:teachers,id',
+            'course_id' => 'required|exists:courses,id',
+            'month' => 'nullable|string',
+            'cost' => 'required|integer',
+            'number_of_sessions' => 'required|integer',
+            'start_date' => 'nullable|date',
+            'day_one' => 'nullable|date',
+            'day_two' => 'nullable|date',
+            'date' => 'nullable|date',
+        ], []);
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        $lecture->update($request->all());
+        return redirect()->route('lectures.index');
     }
 
     /**
@@ -80,6 +117,7 @@ class LectureController extends Controller
      */
     public function destroy(Lecture $lecture)
     {
-        //
+        $lecture->delete();
+        return redirect()->route('lectures.index');
     }
 }
