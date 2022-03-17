@@ -48,7 +48,7 @@ class AuthenticatesController extends Controller
             'service' => 'nullable|integer',
             'send_score_times' => 'required|integer',
             'student_id' => 'required|exists:students,id',
-            'status' => 'required|integer',
+            'status' => 'nullable|integer|in:0,1,2,3',
         ], []);
 
         if ($validator->fails()) {
@@ -105,7 +105,7 @@ class AuthenticatesController extends Controller
             'service' => 'nullable|integer',
             'send_score_times' => 'required|integer',
             'student_id' => 'required|exists:students,id',
-            'status' => 'required|integer',
+            'status' => 'nullable|integer|in:0,1,2,3',
         ], []);
 
         if ($validator->fails()) {

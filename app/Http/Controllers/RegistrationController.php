@@ -43,7 +43,7 @@ class RegistrationController extends Controller
             'test_center' => 'required|string',
             'student_id' => 'required|exists:students,id',
             'edu_center_id' => 'required|exists:edu_centers,id',
-            'status' => 'required|integer',
+            'status' => 'required|integer|in:0,1,2',
         ], []);
 
         if ($validator->fails()) {
@@ -94,7 +94,7 @@ class RegistrationController extends Controller
             'test_center' => 'required|string',
             'student_id' => 'required|exists:students,id',
             'edu_center_id' => 'required|exists:edu_centers,id',
-            'status' => 'required|integer',
+            'status' => 'required|integer|in:0,1,2',
         ], []);
 
         if ($validator->fails()) {

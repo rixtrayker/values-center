@@ -46,6 +46,7 @@ class CatcherController extends Controller
             'student_name' => 'required',
             'mobile' => 'required',
             'notes' => 'required',
+            'status' => 'nullable|integer|in:0,1,2,3',
         ], []);
 
         if ($validator->fails()) {
@@ -97,7 +98,8 @@ class CatcherController extends Controller
             'admin_name' => 'required',
             'student_name' => 'required',
             'mobile' => 'required',
-            'notes' => 'required'
+            'notes' => 'required',
+            'status' => 'nullable|integer|in:0,1,2,3',
         ], []);
 
         if ($validator->fails()) {
