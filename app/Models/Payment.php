@@ -12,6 +12,11 @@ class Payment extends Model
     public static $DONE = 1;
     public static $REFUNDED = 2;
 
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
+
     public function registration()
     {
         return $this->belongsTo(Registration::class);

@@ -5,12 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bank extends Model
+class VCash extends Model
 {
     use HasFactory;
-
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
+    protected $table =  'v_cashes';
 }

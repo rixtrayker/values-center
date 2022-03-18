@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->foreignId('paid_for')->nullable()->constrained('users');
             $table->foreignId('student_lecture_id')->nullable()->constrained('lecture_student'); // not necessary
             $table->foreignId('edu_center_id')->nullable()->constrained();
+            $table->foreignId('vf_acc_id')->nullable()->constrained('v_cashes');
             $table->boolean('is_vodafone')->default(0);
             $table->boolean('is_vf_trans')->default(0); //transfering money vs (deposit or withdraw )
             $table->foreignId('bank_id')->nullable()->constrained();
