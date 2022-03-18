@@ -2,38 +2,35 @@
 
 @section('content')
 
+
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon"><i class="fa fa-paperclip text-primary"></i></span>
-            <h3 class="card-label">Edit {{$pageName}}</h3>
+            <h3 class="card-label">Create {{$pageName}}</h3>
         </div>
     </div>
     <div class="card-body">
-
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.update',$bank->id) }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('vcashes.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                            @method('PUT')
+
                             <div class="kt-portlet__body">
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Number : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name" value="{{$bank->name}}" />
+										<input type="text" class="form-control m-input" name="number"  />
 									</div>
 
 								</div>
-
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Initial Balance : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance" value="{{$bank->init_balance}}" />
+										<input type="number" class="form-control m-input" name="init_balance"  />
 									</div>
 
 								</div>
-
-
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>
 
@@ -55,6 +52,7 @@
 
                     <!--end::Portlet-->
                 </div>
+
 
 @endsection
 

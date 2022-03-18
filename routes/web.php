@@ -13,6 +13,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\VCashController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 // admin
 Route::resource('banks', BankController::class);
+Route::resource('vcashes', VCashController::class);
 Route::resource('educenters', EduCenterController::class);
 Route::resource('payments', PaymentController::class);
 Route::resource('teachers', TeacherController::class);
