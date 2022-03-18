@@ -39,7 +39,7 @@ class EduCenterController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string|unique:edu_centers,name',
         ], []);
 
@@ -48,7 +48,7 @@ class EduCenterController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        EduCenter::create($request->all());
+        EduCenter::create($request->except('_token'));
         return redirect()->route('educenters.index');
     }
 
@@ -83,7 +83,7 @@ class EduCenterController extends Controller
      */
     public function update(Request $request, EduCenter $eduCenter)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string|unique:edu_centers,name,'.$id,
         ], []);
         if ($validator->fails()) {
@@ -97,9 +97,9 @@ class EduCenterController extends Controller
         //     'detail' => 'required',
         // ]);
 
-        $eduCenter->update($request->all());
+        $eduCenter->update($request->except('_token'));
         // $record = EduCenter::findOrFail($id);
-        // $record->update(($request->all()));
+        // $record->update(($request->except('_token')));
         return redirect()->route('educenters.index');
     }
 

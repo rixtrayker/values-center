@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bank extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     public function payments()
     {
         return $this->hasMany(Payment::class);

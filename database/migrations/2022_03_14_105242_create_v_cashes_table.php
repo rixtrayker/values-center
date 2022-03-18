@@ -12,11 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('v_cashes', function (Blueprint $table) {
             $table->id();
             $table->string('number');
             $table->integer('init_balance');
-            $table->integer('current_balance');
+            $table->integer('current_balance')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('v_cashes');
     }
 };

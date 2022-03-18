@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Catcher extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+
     public static $PENDING = 0;
     public static $PROCESSING = 1;
     public static $COMPLETED = 2;

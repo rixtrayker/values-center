@@ -39,7 +39,7 @@ class StudentController extends Controller
     {
         // $request['serial'] =
 
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
             'serial' => 'required|string',
             'mobile' => 'required',
@@ -51,7 +51,7 @@ class StudentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Student::create($request->all());
+        Student::create($request->except('_token'));
         return redirect()->route('students.index');
     }
 
@@ -89,7 +89,7 @@ class StudentController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
             'mobile' => 'required',
             'grade' => 'string|nullable',
@@ -100,7 +100,7 @@ class StudentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $student->update($request->all());
+        $student->update($request->except('_token'));
         return redirect()->route('students.index');
     }
 

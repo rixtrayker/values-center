@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class BankController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'bank');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,8 +41,9 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string|unique:banks,name',
+            'init_balance' => 'required|integer',
         ], []);
 
         if ($validator->fails()) {
@@ -46,7 +51,7 @@ class BankController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Bank::create($request->all());
+        Bank::create($request->except('_token'));
         return redirect()->route('banks.index');
     }
 
@@ -81,15 +86,16 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string|unique:banks,name,'.$id,
+            'init_balance' => 'required|integer',
         ], []);
         if ($validator->fails()) {
             return back()
                     ->withErrors($validator)
                     ->withInput();
         }
-        $banks->update($request->all());
+        $banks->update($request->except('_token'));
         return redirect()->route('banks.index');
     }
 

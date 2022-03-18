@@ -37,7 +37,7 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
         ], []);
 
@@ -46,7 +46,7 @@ class AttendanceController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Attendance::create($request->all());
+        Attendance::create($request->except('_token'));
         return redirect()->route('attendances.index');
     }
 
@@ -81,7 +81,7 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
         ], []);
         if ($validator->fails()) {
@@ -89,7 +89,7 @@ class AttendanceController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $attendance->update($request->all());
+        $attendance->update($request->except('_token'));
         return redirect()->route('attendances.index');
     }
 

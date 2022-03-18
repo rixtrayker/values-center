@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('init_balance');
-            $table->integer('current_balance');
+            $table->integer('current_balance')->default(0);
             $table->timestamps();
         });
     }

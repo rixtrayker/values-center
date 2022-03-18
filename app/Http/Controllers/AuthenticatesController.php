@@ -37,7 +37,7 @@ class AuthenticatesController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'ACT1' => 'nullable|integer',
             'ACT2' => 'nullable|integer',
@@ -56,7 +56,7 @@ class AuthenticatesController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Authenticates::create($request->all());
+        Authenticates::create($request->except('_token'));
         return redirect()->route('authenticates.index');
     }
 
@@ -94,7 +94,7 @@ class AuthenticatesController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             // 'serial' => 'required|string',
             'ACT1' => 'nullable|integer',
             'ACT2' => 'nullable|integer',
@@ -113,7 +113,7 @@ class AuthenticatesController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $authenticates->update($request->all());
+        $authenticates->update($request->except('_token'));
         return redirect()->route('authenticates.index');
     }
 

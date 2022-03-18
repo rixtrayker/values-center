@@ -38,7 +38,7 @@ class CatcherController extends Controller
     public function store(Request $request)
     {
         // $request['serial'] =
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'serial' => 'required',
             'name' => 'required|string',
             'serial' => 'required',
@@ -54,7 +54,7 @@ class CatcherController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Catcher::create($request->all());
+        Catcher::create($request->except('_token'));
         return redirect()->route('catchers.index');
     }
 
@@ -92,7 +92,7 @@ class CatcherController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
             'serial' => 'required',
             'admin_name' => 'required',
@@ -107,7 +107,7 @@ class CatcherController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $catcher->update($request->all());
+        $catcher->update($request->except('_token'));
         return redirect()->route('catchers.index');
     }
 

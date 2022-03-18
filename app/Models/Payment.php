@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
     public static $PENDING = 0;
     public static $DONE = 1;
     public static $REFUNDED = 2;

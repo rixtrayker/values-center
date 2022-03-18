@@ -9,6 +9,8 @@ class Refund extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public static $PENDING = 0;
     public static $DONE = 1;
 

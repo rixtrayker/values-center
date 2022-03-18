@@ -39,7 +39,7 @@ class RefundController extends Controller
     {
         // $request['serial'] =
 
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'payment_id' => 'required|exists:payments,id',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
@@ -51,7 +51,7 @@ class RefundController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Refund::create($request->all());
+        Refund::create($request->except('_token'));
         return redirect()->route('refunds.index');
     }
 
@@ -89,7 +89,7 @@ class RefundController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'payment_id' => 'required|exists:payments,id',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
             'status' => 'integer|in:0,1',
@@ -100,7 +100,7 @@ class RefundController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $refund->update($request->all());
+        $refund->update($request->except('_token'));
         return redirect()->route('refunds.index');
     }
 

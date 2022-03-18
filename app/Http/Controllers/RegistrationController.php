@@ -38,7 +38,7 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
         // $request['serial'] =
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'test_center' => 'required|string',
             'student_id' => 'required|exists:students,id',
@@ -51,7 +51,7 @@ class RegistrationController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Registration::create($request->all());
+        Registration::create($request->except('_token'));
         return redirect()->route('registrations.index');
     }
 
@@ -89,7 +89,7 @@ class RegistrationController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             // 'serial' => 'required|string',
             'test_center' => 'required|string',
             'student_id' => 'required|exists:students,id',
@@ -102,7 +102,7 @@ class RegistrationController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $registration->update($request->all());
+        $registration->update($request->except('_token'));
         return redirect()->route('registrations.index');
     }
 

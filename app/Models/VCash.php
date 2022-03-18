@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VCash extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
     protected $table =  'v_cashes';
+
+    // relations
 }

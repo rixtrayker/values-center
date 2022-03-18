@@ -37,7 +37,7 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
         ], []);
 
@@ -46,7 +46,7 @@ class SettingController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Setting::create($request->all());
+        Setting::create($request->except('_token'));
         return redirect()->route('settings.index');
     }
 
@@ -81,7 +81,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
         ], []);
 
@@ -90,7 +90,7 @@ class SettingController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $setting->update($request->all());
+        $setting->update($request->except('_token'));
         return redirect()->route('settings.index');
     }
 

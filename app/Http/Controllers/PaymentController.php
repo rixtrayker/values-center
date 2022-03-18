@@ -39,7 +39,7 @@ class PaymentController extends Controller
     {
         // $request['serial'] =
 
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'reason' => 'required|string',
             'payment' => 'required|integer',
@@ -63,7 +63,7 @@ class PaymentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Payment::create($request->all());
+        Payment::create($request->except('_token'));
         return redirect()->route('payments.index');
     }
 
@@ -101,7 +101,7 @@ class PaymentController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'reason' => 'required|string',
             'payment' => 'required|integer',
@@ -124,7 +124,7 @@ class PaymentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $payment->update($request->all());
+        $payment->update($request->except('_token'));
         return redirect()->route('payments.index');
     }
 

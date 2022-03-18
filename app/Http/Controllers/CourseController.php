@@ -37,7 +37,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
             'teacher_id' => 'required|exists:teachers,id',
 
@@ -48,7 +48,7 @@ class CourseController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Course::create($request->all());
+        Course::create($request->except('_token'));
         return redirect()->route('courses.index');
     }
 
@@ -83,7 +83,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
             'teacher_id' => 'required|exists:teachers,id',
 
@@ -93,7 +93,7 @@ class CourseController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $course->update($request->all());
+        $course->update($request->except('_token'));
         return redirect()->route('courses.index');
     }
 

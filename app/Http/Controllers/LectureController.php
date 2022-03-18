@@ -37,7 +37,7 @@ class LectureController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'teacher_id' => 'nullable|exists:teachers,id',
             'course_id' => 'required|exists:courses,id',
             'month' => 'nullable|string',
@@ -54,7 +54,7 @@ class LectureController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Lecture::create($request->all());
+        Lecture::create($request->except('_token'));
         return redirect()->route('lectures.index');
     }
 
@@ -89,7 +89,7 @@ class LectureController extends Controller
      */
     public function update(Request $request, Lecture $lecture)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'teacher_id' => 'nullable|exists:teachers,id',
             'course_id' => 'required|exists:courses,id',
             'month' => 'nullable|string',
@@ -105,7 +105,7 @@ class LectureController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $lecture->update($request->all());
+        $lecture->update($request->except('_token'));
         return redirect()->route('lectures.index');
     }
 

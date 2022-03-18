@@ -37,7 +37,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
         ], []);
 
@@ -46,7 +46,7 @@ class TeacherController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Teacher::create($request->all());
+        Teacher::create($request->except('_token'));
         return redirect()->route('teachers.index');
     }
 
@@ -81,7 +81,7 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
         ], []);
         if ($validator->fails()) {
@@ -89,7 +89,7 @@ class TeacherController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $teacher->update($request->all());
+        $teacher->update($request->except('_token'));
         return redirect()->route('teachers.index');
     }
 
