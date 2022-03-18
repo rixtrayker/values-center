@@ -229,14 +229,14 @@
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <i class="menu-icon fa fa-tags"></i>
-        <span class="menu-text">VCash accounts</span>
+        <span class="menu-text">Vodafone Cash</span>
         <i class="menu-arrow"></i>
     </a>
     <div class="menu-submenu">
         <i class="menu-arrow"></i>
         <ul class="menu-subnav">
             <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link"><span class="menu-text">VCash accounts</span></span>
+                <span class="menu-link"><span class="menu-text">Vodafone Cash</span></span>
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                 <a href="{{route('vcashes.create')}}" class="menu-link menu-toggle">
@@ -246,6 +246,381 @@
             </li>
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                 <a href="{{route('vcashes.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Edu Centers --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Centers & branches</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Centers & branches</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('educenters.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('educenters.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Teachers --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Teachers</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Teachers</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('teachers.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('teachers.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Students --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Students</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Students</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('students.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('students.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Courses --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Courses</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Courses</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('courses.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('courses.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Lectures --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Lectures</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Lectures</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('lectures.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('lectures.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Registrations --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Registrations</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Registrations</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('registrations.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('registrations.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+
+{{-- Authenticates --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Authenticates</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Authenticates</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('authenticates.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('authenticates.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Catchers --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Catchers</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Catchers</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('catchers.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('catchers.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Payments --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Payments</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Payments</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('payments.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('payments.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Refunds --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Refunds</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Refunds</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('refunds.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('refunds.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+
+
+{{-- Attendances --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Attendances</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Attendances</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('attendances.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('attendances.index')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">List</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+
+{{-- Settings --}}
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <i class="menu-icon fa fa-tags"></i>
+        <span class="menu-text">Settings</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link"><span class="menu-text">Settings</span></span>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('settings.create')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('settings.index')}}" class="menu-link menu-toggle">
                     <i class="menu-bullet menu-bullet-dot"><span></span></i>
                     <span class="menu-text">List</span>
                 </a>
