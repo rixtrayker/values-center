@@ -18,24 +18,91 @@
                             <div class="kt-portlet__body">
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Reason : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name"  />
+										<input type="text" class="form-control m-input" name="reason"  />
 									</div>
 								</div>
 
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Payment amount : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name"  />
+										<input type="number" class="form-control m-input" name="payment_amount"  />
 									</div>
 								</div>
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Paying method : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name"  />
+                                        <select name="paying_method" class="form-control m-input">
+                                            <option value="cash">Cash</option>
+                                            <option value="vodafone_cash">Vodafone</option>
+                                            <option value="bank">Bank</option>
+                                        </select>
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">if bank select one : </label>
+									<div class="col-lg-4">
+                                        <select name="bank_id" class="form-control m-input">
+                                            <option value="">None</option>
+                                            @foreach ( \App\Models\Bank::all() as $bank )
+                                                <option value="{{$bank->id}}">{{$bank->name}}</option>
+                                            @endforeach
+                                        </select>
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">if vodafone select number : </label>
+									<div class="col-lg-4">
+                                        <select name="vf_acc_id" class="form-control m-input">
+                                            <option value="">None</option>
+                                            @foreach ( \App\Models\VCash::all() as $acc )
+                                                <option value="{{$acc->id}}">{{$acc->name}}</option>
+                                            @endforeach
+                                        </select>
+									</div>
+								</div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label pt-2 inline col-lg-2">is vodafone transaction : </label>
+                                    <div class="radio-inline col-lg-4">
+                                        <label class="radio">
+                                            <input type="radio" value="0" name="is_vf_trans"/>
+                                            <span></span>
+                                            No
+                                        </label>
+                                        <label class="radio">
+                                            &nbsp;
+                                            <input  type="radio" value="1" name="is_vf_trans" />
+                                            <span></span>
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label pt-2 inline col-lg-2">Status : </label>
+                                    <div class="radio-inline col-lg-4">
+                                        <label class="radio">
+                                            <input type="radio" value="0" name="status"/>
+                                            <span></span>
+                                            Pending
+                                        </label>
+                                        <label class="radio">
+                                            &nbsp;
+                                            <input  type="radio" value="1" name="status" checked />
+                                            <span></span>
+                                            Done
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Document image: </label>
+									<div class="col-lg-4">
+										<input type="file" class="form-control m-input" name="image"  />
 									</div>
 								</div>
 
