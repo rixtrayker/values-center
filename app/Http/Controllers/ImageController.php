@@ -49,7 +49,6 @@ class ImageController extends Controller
                 //for storage upload
                 /* $image->storeAs('images', $imageName); */
 
-
                 $image->move(public_path('images'), $imageName);
 
                 $images[]['name'] = $imageName;

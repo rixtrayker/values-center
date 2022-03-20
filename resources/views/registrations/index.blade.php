@@ -9,7 +9,7 @@
         </div>
         <div class="card-toolbar">
             <!--begin::Button-->
-            <a href="{{ route('banks.create') }}" class="btn btn-primary font-weight-bolder">
+            <a href="{{ route('registrations.create') }}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -61,8 +61,8 @@
                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="true">Action</button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												    <a class="dropdown-item" href="{{route('registrations.edit', $record->id)}}"><i class="fa fa-edit"></i> Edit</a>
-                                                    <a class="dropdown-item" data-toggle="modal" href="#myModal-{{ $record->id }}"><i class="fa fa-trash"></i> Delete</a>
+												    <a class="dropdown-item" href="{{route('registrations.edit', $record->id)}}"><i class="fa fa-edit"></i> &nbsp; Edit</a></a>
+                                                    <a class="dropdown-item" data-toggle="modal" href="#myModal-{{ $record->id }}"><i class="fa fa fa-trash"></i> &nbsp; Delete</a>>
                                                 </div>
                                                     <div class="modal fade" id="myModal-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">

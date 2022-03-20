@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +31,8 @@ class LectureController extends Controller
      */
     public function create()
     {
-        return view('lectures.create');
+        $courses = Course::all();
+        return view('lectures.create', compact('courses'));
     }
 
     /**
@@ -42,15 +44,12 @@ class LectureController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->except('_token'), [
-            'teacher_id' => 'nullable|exists:teachers,id',
             'course_id' => 'required|exists:courses,id',
             'month' => 'nullable|string',
             'cost' => 'required|integer',
             'number_of_sessions' => 'required|integer',
-            'start_date' => 'nullable|date',
             'day_one' => 'nullable|date',
             'day_two' => 'nullable|date',
-            'date' => 'nullable|date',
         ], []);
 
         if ($validator->fails()) {
@@ -81,7 +80,8 @@ class LectureController extends Controller
      */
     public function edit(Lecture $lecture)
     {
-        return view('lectures.edit', compact('lecture'));
+        $courses = Course::all();
+        return view('lectures.edit', compact(['lecture','courses']));
     }
 
     /**
@@ -94,15 +94,12 @@ class LectureController extends Controller
     public function update(Request $request, Lecture $lecture)
     {
         $validator = Validator::make($request->except('_token'), [
-            'teacher_id' => 'nullable|exists:teachers,id',
             'course_id' => 'required|exists:courses,id',
             'month' => 'nullable|string',
             'cost' => 'required|integer',
             'number_of_sessions' => 'required|integer',
-            'start_date' => 'nullable|date',
             'day_one' => 'nullable|date',
             'day_two' => 'nullable|date',
-            'date' => 'nullable|date',
         ], []);
         if ($validator->fails()) {
             return back()

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('serial');
             $table->string('reason');
-            $table->integer('payment');
+            $table->integer('payment_amount');
             $table->integer('refund_discount')->nullable();
             $table->string('image')->nullable();
             $table->string('paying_method'); // vc - bank - cash

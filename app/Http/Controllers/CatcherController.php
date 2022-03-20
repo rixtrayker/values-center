@@ -48,7 +48,6 @@ class CatcherController extends Controller
         $request['user_id'] = Auth::id();
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required',
-            'serial' => 'required',
             // 'admin_name' => 'required',
             'student_name' => 'required',
             'mobile' => 'required',

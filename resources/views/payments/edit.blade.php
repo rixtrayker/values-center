@@ -12,7 +12,7 @@
     <div class="card-body">
 
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.update',$bank->id) }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('payments.update',$payment->id) }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                             @method('PUT')
                             <div class="kt-portlet__body">
@@ -22,17 +22,7 @@
 									<div class="col-lg-4">
 										<input type="text" class="form-control m-input" name="name" value="{{$bank->name}}" />
 									</div>
-
 								</div>
-
-                                <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
-									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance" value="{{$bank->init_balance}}" />
-									</div>
-
-								</div>
-
 
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>

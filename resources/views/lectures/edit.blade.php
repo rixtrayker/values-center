@@ -12,27 +12,51 @@
     <div class="card-body">
 
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.update',$bank->id) }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('lectures.update',$lecture->id) }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                             @method('PUT')
                             <div class="kt-portlet__body">
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Course : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name" value="{{$bank->name}}" />
+                                        <select name="course_id"class="form-control m-input">
+                                            @foreach ($courses as $course)
+                                            <option value="{{$course->id}}" @if($lecture->course_id == $course->id) @endif>{{$course->name}}</option>
+                                            @endforeach
+                                        </select>
 									</div>
-
 								</div>
-
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
+									<label class="col-lg-2 col-form-label">Month : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance" value="{{$bank->init_balance}}" />
+										<input type="text" class="form-control m-input" name="month" value="{{$lecture->month}}"  />
 									</div>
-
 								</div>
-
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Cost : </label>
+									<div class="col-lg-4">
+										<input type="number" class="form-control m-input" name="cost" value="{{$lecture->cost}}"  />
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Number of sessions : </label>
+									<div class="col-lg-4">
+										<input type="number" min="1" class="form-control m-input" name="number_of_sessions" value="{{$lecture->number_of_sessions}}"  />
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Day one : </label>
+									<div class="col-lg-4">
+										<input type="date" class="form-control m-input" name="day_one" value="{{$lecture->day_one}}"  />
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Day two : </label>
+									<div class="col-lg-4">
+										<input type="date" class="form-control m-input" name="day_two" value="{{$lecture->day_two}}"  />
+									</div>
+								</div>
 
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>

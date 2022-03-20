@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EduCenter;
 use App\Models\Payment;
+use App\Models\Student;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
@@ -31,6 +35,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
+        $eduCenters = EduCenter::all();
         return view('payments.create');
     }
 
@@ -48,17 +53,16 @@ class PaymentController extends Controller
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'reason' => 'required|string',
-            'payment' => 'required|integer',
+            'payment_amount' => 'required|integer',
             'refund_discount' => 'nullable|integer',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
             'paying_method' => 'required|string',
-            'paid_for' => 'nullable|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
             'student_lecture_id' => 'nullable|exists:lecture_student,id',
             'edu_center_id' => 'nullable|exists:edu_centers,id',
-            'vf_accc_id' => 'nullable|exists:v_cashesw,id',
-            'is_vodafone' => 'nullable|in:0,1',
+            'vf_accc_id' => 'nullable|required_if:paying_method,vodafone_cash|exists:v_cashes,id',
             'is_vf_trans' => 'nullable|in:0,1',
-            'bank_id' => 'nullable|exists:banks,id',
+            'bank_id' => 'nullable|required_if:paying_method,bank|exists:banks,id',
             'registration_id' => 'nullable|exists:registrations,id',
             'authenticate_id' => 'nullable|exists:authenticates,id',
             'status' => 'required|integer|in:0,1,2',
@@ -69,6 +73,8 @@ class PaymentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
+        $path = Storage::putFile('payment-images', new File($request->image));
+        $request->image = $path;
         $record = Payment::create($request->except('_token'));
         $record->serial = 'PAY_'.$record->id;
         $record->save();
@@ -115,17 +121,16 @@ class PaymentController extends Controller
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'reason' => 'required|string',
-            'payment' => 'required|integer',
+            'payment_amount' => 'required|integer',
             'refund_discount' => 'nullable|integer',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
             'paying_method' => 'required|string',
-            'paid_for' => 'nullable|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
             'student_lecture_id' => 'nullable|exists:lecture_student,id',
             'edu_center_id' => 'nullable|exists:edu_centers,id',
-            'vf_accc_id' => 'nullable|exists:v_cashesw,id',
-            'is_vodafone' => 'nullable|in:0,1',
+            'vf_accc_id' => 'nullable|required_if:paying_method,vodafone_cash|exists:v_cashes,id',
             'is_vf_trans' => 'nullable|in:0,1',
-            'bank_id' => 'nullable|exists:banks,id',
+            'bank_id' => 'nullable|required_if:paying_method,bank|exists:banks,id',
             'registration_id' => 'nullable|exists:registrations,id',
             'authenticate_id' => 'nullable|exists:authenticates,id',
             'status' => 'required|integer|in:0,1,2',
