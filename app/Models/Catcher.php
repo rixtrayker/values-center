@@ -21,12 +21,12 @@ class Catcher extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function userByMe()
+    public function byUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function userToMe()
+    public function toUser()
     {
         return $this->belongsTo(User::class, 'admin_id');
     }

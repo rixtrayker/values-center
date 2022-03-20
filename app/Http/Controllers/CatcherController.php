@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catcher;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CatcherController extends Controller
@@ -30,7 +32,8 @@ class CatcherController extends Controller
      */
     public function create()
     {
-        return view('catchers.create');
+        $users = User::all();
+        return view('catchers.create', compact('users'));
     }
 
     /**
@@ -42,10 +45,11 @@ class CatcherController extends Controller
     public function store(Request $request)
     {
         $request['serial'] = '0';
+        $request['user_id'] = Auth::id();
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required',
             'serial' => 'required',
-            'admin_name' => 'required',
+            // 'admin_name' => 'required',
             'student_name' => 'required',
             'mobile' => 'required',
             'notes' => 'nullable|string',
@@ -99,15 +103,23 @@ class CatcherController extends Controller
         if ($request->serial) {
             $request->remove('serial');
         }
+        if ($request->notes) {
+            $request->remove('notes');
+        }
+        if ($request->user_id) {
+            $request->remove('user_id');
+        }
+        if ($request->admin_id) {
+            $request->remove('admin_id');
+        }
         $validator = Validator::make($request->except('_token'), [
-            'name' => 'required|string',
             'serial' => 'required',
             'admin_name' => 'required',
             'student_name' => 'required',
             'mobile' => 'required',
             'notes' => 'nullable|string',
             'comment' => 'nullable|string',
-            'status' => 'nullable|integer|in:0,1,2,3',
+            'status' => 'required|integer|in:0,1,2,3',
         ], []);
 
         if ($validator->fails()) {

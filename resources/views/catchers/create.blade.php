@@ -29,17 +29,27 @@
 										<input type="text" class="form-control m-input" name="mobile"  />
 									</div>
 								</div>
-                                <div class="form-group m-form__group row">
+                                {{-- <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Admin name : </label>
 									<div class="col-lg-4">
 										<input type="text" class="form-control m-input" name="admin_name"  />
+									</div>
+								</div> --}}
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Admin name : </label>
+									<div class="col-lg-4">
+                                        <select name="admin_id" class="form-control m-input">
+                                            @foreach ($users as $user)
+                                            <option value="{{$user->id}}">{{$user->name}}  </option>
+                                            @endforeach
+                                        </select>
 									</div>
 								</div>
 
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Notes : </label>
 									<div class="col-lg-4">
-                                        <textarea name="notes" class="form-control m-textarea" cols="30" rows="10"></textarea>
+                                        <textarea name="notes" class="form-control m-textarea" cols="30" rows="5"></textarea>
 									</div>
 								</div>
 

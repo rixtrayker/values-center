@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('serial');
             $table->string('student_name');
             $table->string('mobile');
-            $table->string('admin_name');
+            $table->string('admin_name')->nullable();
             $table->string('notes')->nullable(); // before
             $table->string('comment')->nullable(); // after
             $table->foreignId('student_id')->nullable()->constrained();
