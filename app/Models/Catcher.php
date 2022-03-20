@@ -20,4 +20,14 @@ class Catcher extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function userByMe()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function userToMe()
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
 }

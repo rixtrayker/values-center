@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EduCenter;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'teacher');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teachers.create');
+        $centers = EduCenter::all();
+        return view('teachers.create', compact('centers'));
     }
 
     /**
@@ -39,6 +45,8 @@ class TeacherController extends Controller
     {
         $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
+            'mobile' => 'nullable|string',
+
         ], []);
 
         if ($validator->fails()) {
@@ -69,7 +77,9 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        return view('teachers.edit', compact('teacher'));
+        $centers = EduCenter::all();
+
+        return view('teachers.edit', compact(['teacher','centers']));
     }
 
     /**
@@ -83,6 +93,7 @@ class TeacherController extends Controller
     {
         $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
+            'mobile' => 'nullable|string',
         ], []);
         if ($validator->fails()) {
             return back()

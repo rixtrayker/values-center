@@ -21,7 +21,8 @@ return new class extends Migration {
             $table->string('notes')->nullable(); // before
             $table->string('comment')->nullable(); // after
             $table->foreignId('student_id')->nullable()->constrained();
-            // $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('admin_id')->nullable()->constrained('users');
             // 0 nothing 1 processing 2 completed 3 failed
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

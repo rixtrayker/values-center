@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('test_center');
             $table->foreignId('student_id')->constrained();
             $table->foreignId('edu_center_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->tinyInteger('status'); // 0 booked 1 paid 2 booked and paid
             $table->timestamps();
         });

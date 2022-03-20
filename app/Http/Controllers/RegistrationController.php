@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EduCenter;
 use App\Models\Registration;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'registration');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +33,9 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        return view('registrations.create');
+        $students = Student::all();
+        $centers = EduCenter::all();
+        return view('registrations.create', compact(['students','centers']));
     }
 
     /**
@@ -37,7 +46,8 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        // $request['serial'] =
+        $request['serial'] = '0';
+        $request['user_id'] = Auth::id();
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'test_center' => 'required|string',
@@ -51,7 +61,9 @@ class RegistrationController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Registration::create($request->except('_token'));
+        $record = Registration::create($request->except('_token'));
+        $record->serial = 'REG_'.$record->id;
+        $record->save();
         return redirect()->route('registrations.index');
     }
 
@@ -74,7 +86,9 @@ class RegistrationController extends Controller
      */
     public function edit(Registration $registration)
     {
-        return view('registrations.edit', compact('registration'));
+        $students = Student::all();
+        $centers = EduCenter::all();
+        return view('registrations.edit', compact(['registration','students','centers']));
     }
 
     /**
@@ -88,6 +102,9 @@ class RegistrationController extends Controller
     {
         if ($request->serial) {
             $request->remove('serial');
+        }
+        if ($request->user_id) {
+            $request->remove('user_id');
         }
         $validator = Validator::make($request->except('_token'), [
             // 'serial' => 'required|string',

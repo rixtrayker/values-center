@@ -48,4 +48,9 @@ class Payment extends Model
     {
         return $this->hasOne(Refund::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

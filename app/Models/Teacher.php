@@ -19,4 +19,8 @@ class Teacher extends Model
     {
         return $this->hasMany(Lecture::class);
     }
+    public function eduCenter()
+    {
+        return $this->belongsTo(EduCenter::class);
+    }
 }

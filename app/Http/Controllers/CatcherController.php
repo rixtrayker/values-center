@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class CatcherController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'catcher');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,15 +41,16 @@ class CatcherController extends Controller
      */
     public function store(Request $request)
     {
-        // $request['serial'] =
+        $request['serial'] = '0';
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required',
-            'name' => 'required|string',
             'serial' => 'required',
             'admin_name' => 'required',
             'student_name' => 'required',
             'mobile' => 'required',
-            'notes' => 'required',
+            'notes' => 'nullable|string',
+            'user_id' => 'nullable|exists:users,id',
+            'admin_id' => 'nullable|exists:users,id',
             'status' => 'nullable|integer|in:0,1,2,3',
         ], []);
 
@@ -54,7 +59,9 @@ class CatcherController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Catcher::create($request->except('_token'));
+        $record = Catcher::create($request->except('_token'));
+        $record->serial = 'CCHR_'.$record->id;
+        $record->save();
         return redirect()->route('catchers.index');
     }
 
@@ -98,7 +105,8 @@ class CatcherController extends Controller
             'admin_name' => 'required',
             'student_name' => 'required',
             'mobile' => 'required',
-            'notes' => 'required',
+            'notes' => 'nullable|string',
+            'comment' => 'nullable|string',
             'status' => 'nullable|integer|in:0,1,2,3',
         ], []);
 

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EduCenter;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'student');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        $centers = EduCenter::all();
+        return view('students.create', compact('centers'));
     }
 
     /**
@@ -37,7 +43,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // $request['serial'] =
+        $request['serial'] = '0';
 
         $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
@@ -51,7 +57,9 @@ class StudentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Student::create($request->except('_token'));
+        $record = Student::create($request->except('_token'));
+        $record->serial = 'STU_'.$record->id;
+        $record->save();
         return redirect()->route('students.index');
     }
 
@@ -74,7 +82,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('students.edit', compact('student'));
+        $centers = EduCenter::all();
+        return view('students.edit', compact(['student','centers']));
     }
 
     /**

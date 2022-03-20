@@ -39,9 +39,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 // admin
+Route::resource('educenters', EduCenterController::class);
 Route::resource('banks', BankController::class);
 Route::resource('vcashes', VCashController::class);
-Route::resource('educenters', EduCenterController::class);
 Route::resource('payments', PaymentController::class);
 Route::resource('teachers', TeacherController::class);
 Route::resource('registrations', RegistrationController::class);

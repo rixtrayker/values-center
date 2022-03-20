@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('serial');
             $table->foreignId('payment_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->string('image')->nullable();
             $table->tinyInteger('status'); // 0 pending 1 done
             $table->timestamps();

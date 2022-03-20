@@ -14,6 +14,11 @@ class Registration extends Model
     public static $PAID = 1;
     public static $DONE = 2;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function student()
     {
         return $this->belongsTo(Student::class);

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class EduCenterController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'Centers & Branches');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -58,9 +62,9 @@ class EduCenterController extends Controller
      * @param  \App\Models\EduCenter  $eduCenter
      * @return \Illuminate\Http\Response
      */
-    public function show(EduCenter $eduCenter)
+    public function show(EduCenter $eduCenterRecord)
     {
-        return view('educenters.show', compact('eduCenter'));
+        return view('educenters.show', compact('eduCenterRecord'));
     }
 
     /**
@@ -69,9 +73,9 @@ class EduCenterController extends Controller
      * @param  \App\Models\EduCenter  $eduCenter
      * @return \Illuminate\Http\Response
      */
-    public function edit(EduCenter $eduCenter)
+    public function edit(EduCenter $eduCenterRecord)
     {
-        return view('educenters.edit', compact('eduCenter'));
+        return view('educenters.edit', compact('eduCenterRecord'));
     }
 
     /**

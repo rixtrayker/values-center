@@ -12,7 +12,7 @@
     </div>
     <div class="card-body">
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.store') }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('courses.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                             <div class="kt-portlet__body">
@@ -22,15 +22,19 @@
 									<div class="col-lg-4">
 										<input type="text" class="form-control m-input" name="name"  />
 									</div>
-
 								</div>
+
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
+									<label class="col-lg-2 col-form-label">Teacher : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance"  />
+                                        <select name="teacher_id"class="form-control m-input">
+                                            @foreach ($teachers as $teacher)
+                                            <option value="{{$teacher->id}}">{{$teacher->name}} - {{$teacher->eduCenter->name}} </option>
+                                            @endforeach
+                                        </select>
 									</div>
-
 								</div>
+
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>
 

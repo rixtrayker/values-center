@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->tinyInteger('service')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('send_score_times')->default(1);
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

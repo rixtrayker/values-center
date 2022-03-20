@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->integer('refund_discount')->nullable();
             $table->string('image')->nullable();
             $table->string('paying_method'); // vc - bank - cash
-            $table->foreignId('paid_for')->nullable()->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('student_lecture_id')->nullable()->constrained('lecture_student'); // not necessary
             $table->foreignId('edu_center_id')->nullable()->constrained();
             $table->foreignId('vf_acc_id')->nullable()->constrained('v_cashes');

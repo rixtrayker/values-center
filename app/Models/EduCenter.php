@@ -29,4 +29,9 @@ class EduCenter extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
+    }
 }

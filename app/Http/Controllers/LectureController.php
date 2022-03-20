@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class LectureController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'lecture');
+    }
     /**
      * Display a listing of the resource.
      *

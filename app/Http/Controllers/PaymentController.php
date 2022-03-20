@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'payment');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +42,8 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        // $request['serial'] =
+        $request['serial'] = '0';
+        $request['user_id'] = Auth::id();
 
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
@@ -63,7 +69,9 @@ class PaymentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Payment::create($request->except('_token'));
+        $record = Payment::create($request->except('_token'));
+        $record->serial = 'PAY_'.$record->id;
+        $record->save();
         return redirect()->route('payments.index');
     }
 
@@ -100,6 +108,9 @@ class PaymentController extends Controller
     {
         if ($request->serial) {
             $request->remove('serial');
+        }
+        if ($request->user_id) {
+            $request->remove('user_id');
         }
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',

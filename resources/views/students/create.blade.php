@@ -12,7 +12,7 @@
     </div>
     <div class="card-body">
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.store') }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('students.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                             <div class="kt-portlet__body">
@@ -25,11 +25,33 @@
 
 								</div>
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
+									<label class="col-lg-2 col-form-label">Mobile : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance"  />
+										<input type="number" class="form-control m-input" name="mobile"  />
 									</div>
 
+								</div>
+
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Center : </label>
+									<div class="col-lg-4">
+                                        <select name="edu_center_id"class="form-control m-input">
+                                            @foreach ($centers as $center)
+                                            <option value="{{$center->id}}">{{$center->name}}</option>
+                                            @endforeach
+                                        </select>
+									</div>
+								</div>
+                                
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Grade : </label>
+									<div class="col-lg-4">
+                                        <select name="grade"class="form-control m-input">
+                                            @for($i=1; $i<=12;$i++)
+                                            <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+									</div>
 								</div>
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>

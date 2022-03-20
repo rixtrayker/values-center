@@ -12,26 +12,64 @@
     <div class="card-body">
 
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.update',$bank->id) }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('registrations.update',$registration->id) }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                             @method('PUT')
                             <div class="kt-portlet__body">
 
-                                <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
-									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name" value="{{$bank->name}}" />
-									</div>
 
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Test Center : </label>
+									<div class="col-lg-4">
+										<input type="text" class="form-control m-input" name="test_center" value="{{$registration->test_center}}"/>
+									</div>
 								</div>
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
+									<label class="col-lg-2 col-form-label">Student : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance" value="{{$bank->init_balance}}" />
+                                        <select name="student_id"class="form-control m-input">
+                                            @foreach ($students as $student)
+                                            <option value="{{$student->id}}" @if($registration->student_id == $student->id) selected @endif>{{$student->name}} - {{$student->eduCenter->name}}  </option>
+                                            @endforeach
+                                        </select>
 									</div>
-
 								</div>
+
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Center : </label>
+									<div class="col-lg-4">
+                                        <select name="edu_center_id"class="form-control m-input">
+                                            @foreach ($centers as $center)
+                                            <option value="{{$center->id}}" @if($registration->edu_center_id == $center->id) selected @endif>{{$center->name}}</option>
+                                            @endforeach
+                                        </select>
+									</div>
+								</div>
+
+                                <div class="form-group row">
+
+                                    <label class="col-form-label pt-2 inline col-lg-2">Status : </label>
+                                    <div class="radio-inline col-lg-4">
+                                        <label class="radio">
+                                            <input type="radio" value="0" name="status"  @if($registration->status === 0) checked @endif>
+                                            <span></span>
+                                            Just book
+                                        </label>
+                                        <label class="radio">
+                                            &nbsp;
+                                            <input  type="radio" value="1" name="status" @if($registration->status === 1) checked @endif />
+                                            <span></span>
+                                            Paid
+                                        </label>
+                                        <label class="radio">
+                                            &nbsp;
+                                            <input  type="radio" value="2" name="status" @if($registration->status === 2) checked @endif />
+                                            <span></span>
+                                            Booked and Paid
+                                        </label>
+                                    </div>
+                                </div>
 
 
 

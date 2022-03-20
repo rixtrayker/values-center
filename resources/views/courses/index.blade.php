@@ -5,11 +5,11 @@
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon"><i class="fa fa-users text-primary"></i></span>
-            <h3 class="card-label">Banks</h3>
+            <h3 class="card-label">Courses</h3>
         </div>
         <div class="card-toolbar">
             <!--begin::Button-->
-            <a href="{{ route('banks.create') }}" class="btn btn-primary font-weight-bolder">
+            <a href="{{ route('courses.create') }}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -35,8 +35,8 @@
                                     <th>#</th>
 
                                     <th>Name</th>
-                                    <th>Initial balance</th>
-                                    <th>Current balance</th>
+                                    <th>Teacher</th>
+                                    <th>Center</th>
 									<th>Action</th>
 
 								</tr>
@@ -47,20 +47,20 @@
 									<tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$record->name}}</td>
-                                            <td>{{$record->init_balance}}</td>
-                                            <td>{{$record->current_balance}}</td>
+                                            <td>{{$record->teacher->name}}</td>
+                                            <td>{{$record->teacher->eduCenter->name}} </td>
                                             <td>
                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="true">Action</button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												    <a class="dropdown-item" href="{{route('banks.edit', $record->id)}}"><i class="fa fa-edit"></i> Edit</a>
+												    <a class="dropdown-item" href="{{route('courses.edit', $record->id)}}"><i class="fa fa-edit"></i> Edit</a>
                                                     <a class="dropdown-item" data-toggle="modal" href="#myModal-{{ $record->id }}"><i class="fa fa-trash"></i> Delete</a>
                                                 </div>
                                                     <div class="modal fade" id="myModal-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                     <div class="modal-body">
-                                                    <form role="form" action="{{ route('banks.destroy',$record->id) }}" class="" method="POST">
+                                                    <form role="form" action="{{ route('courses.destroy',$record->id) }}" class="" method="POST">
                                                     <input name="_method" type="hidden" value="DELETE">
                                                     {{ csrf_field() }}
                                                     <p>are you sure</p>

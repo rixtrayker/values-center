@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AttendanceController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'attendance');
+    }
     /**
      * Display a listing of the resource.
      *

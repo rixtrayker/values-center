@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Authenticates;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticatesController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'authenticates');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,8 @@ class AuthenticatesController extends Controller
      */
     public function create()
     {
-        return view('authenticates.create');
+        $students = Student::all();
+        return view('authenticates.create', compact('students'));
     }
 
     /**
@@ -37,6 +44,9 @@ class AuthenticatesController extends Controller
      */
     public function store(Request $request)
     {
+        $request['serial'] = '0';
+        $request['user_id'] = Auth::id();
+
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'ACT1' => 'nullable|integer',
@@ -56,7 +66,9 @@ class AuthenticatesController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Authenticates::create($request->except('_token'));
+        $record = Authenticates::create($request->except('_token'));
+        $record->serial = 'AUTH_'.$record->id;
+        $record->save();
         return redirect()->route('authenticates.index');
     }
 
@@ -66,9 +78,9 @@ class AuthenticatesController extends Controller
      * @param  \App\Models\Authenticates  $authenticates
      * @return \Illuminate\Http\Response
      */
-    public function show(Authenticates $authenticates)
+    public function show(Authenticates $authenticate)
     {
-        return view('authenticates.show', compact('authenticates'));
+        return view('authenticates.show', compact('authenticate'));
     }
 
     /**
@@ -77,9 +89,10 @@ class AuthenticatesController extends Controller
      * @param  \App\Models\Authenticates  $authenticates
      * @return \Illuminate\Http\Response
      */
-    public function edit(Authenticates $authenticates)
+    public function edit(Authenticates $authenticate)
     {
-        return view('authenticates.edit', compact('authenticates'));
+        $students = Student::all();
+        return view('authenticates.edit', compact(['authenticate','students']));
     }
 
     /**
@@ -93,6 +106,9 @@ class AuthenticatesController extends Controller
     {
         if ($request->serial) {
             $request->remove('serial');
+        }
+        if ($request->user_id) {
+            $request->remove('user_id');
         }
         $validator = Validator::make($request->except('_token'), [
             // 'serial' => 'required|string',

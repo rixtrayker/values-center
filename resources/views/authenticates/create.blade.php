@@ -12,25 +12,50 @@
     </div>
     <div class="card-body">
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.store') }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('authenticates.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                             <div class="kt-portlet__body">
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Student : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name"  />
+                                        <select name="student_id" class="form-control m-input">
+                                            @foreach ($students as $student)
+                                            <option value="{{$student->id}}">{{$student->name}} - {{$student->eduCenter->name}}  </option>
+                                            @endforeach
+                                        </select>
 									</div>
+								</div>
 
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">ACT 1 : </label>
+									<div class="col-lg-2">
+										<input type="number" value="0" min="0" class="form-control m-input" name="ACT1"/>
+									</div>
+                                    <label class="col-lg-2 col-form-label">ACT 2 : </label>
+									<div class="col-lg-2">
+										<input type="number" value="0" min="0" class="form-control m-input" name="ACT2"/>
+									</div>
 								</div>
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
-									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance"  />
+									<label class="col-lg-2 col-form-label">EST 1 : </label>
+									<div class="col-lg-2">
+										<input type="number" value="0" min="0" class="form-control m-input" name="EST1"/>
+									</div>
+                                    <label class="col-lg-2 col-form-label">EST 2 : </label>
+									<div class="col-lg-2">
+										<input type="number" value="0" min="0" class="form-control m-input" name="EST2"/>
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Send score times : </label>
+									<div class="col-lg-2">
+										<input type="number" min="1" class="form-control m-input" name="send_score_times"/>
 									</div>
 
 								</div>
+
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>
 
@@ -57,3 +82,10 @@
 @endsection
 
 
+
+
+@section('js')
+<script>
+     // KTSelect2.init();
+</script>
+@endsection

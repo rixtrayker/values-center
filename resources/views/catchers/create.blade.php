@@ -12,24 +12,35 @@
     </div>
     <div class="card-body">
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.store') }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('catchers.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                             <div class="kt-portlet__body">
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Name : </label>
+									<label class="col-lg-2 col-form-label">Student name : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name"  />
+										<input type="text" class="form-control m-input" name="student_name"  />
 									</div>
-
 								</div>
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
+									<label class="col-lg-2 col-form-label">Mobile : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance"  />
+										<input type="text" class="form-control m-input" name="mobile"  />
 									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Admin name : </label>
+									<div class="col-lg-4">
+										<input type="text" class="form-control m-input" name="admin_name"  />
+									</div>
+								</div>
 
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Notes : </label>
+									<div class="col-lg-4">
+                                        <textarea name="notes" class="form-control m-textarea" cols="30" rows="10"></textarea>
+									</div>
 								</div>
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>

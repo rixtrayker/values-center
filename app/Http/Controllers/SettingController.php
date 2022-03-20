@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'settigns');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Refund;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RefundController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('pageName', 'refund');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +42,8 @@ class RefundController extends Controller
      */
     public function store(Request $request)
     {
-        // $request['serial'] =
+        $request['serial'] = '0';
+        $request['user_id'] = Auth::id();
 
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
@@ -51,7 +57,9 @@ class RefundController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        Refund::create($request->except('_token'));
+        $record = Refund::create($request->except('_token'));
+        $record->serial = 'RFND_'.$record->id;
+        $record->save();
         return redirect()->route('refunds.index');
     }
 
@@ -88,6 +96,9 @@ class RefundController extends Controller
     {
         if ($request->serial) {
             $request->remove('serial');
+        }
+        if ($request->user_id) {
+            $request->remove('user_id');
         }
         $validator = Validator::make($request->except('_token'), [
             'payment_id' => 'required|exists:payments,id',

@@ -5,7 +5,7 @@
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon"><i class="fa fa-users text-primary"></i></span>
-            <h3 class="card-label">Banks</h3>
+            <h3 class="card-label">Registrations</h3>
         </div>
         <div class="card-toolbar">
             <!--begin::Button-->
@@ -34,9 +34,13 @@
 								<tr>
                                     <th>#</th>
 
-                                    <th>Name</th>
-                                    <th>Initial balance</th>
-                                    <th>Current balance</th>
+                                    <th>Serial</th>
+                                    <th>Student</th>
+                                    <th>Test center</th>
+                                    <th>Booking center</th>
+                                    <th>Who Booked it ?</th>
+                                    <th>Status</th>
+                                    <th>Payments No.</th>
 									<th>Action</th>
 
 								</tr>
@@ -46,21 +50,25 @@
 
 									<tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$record->name}}</td>
-                                            <td>{{$record->init_balance}}</td>
-                                            <td>{{$record->current_balance}}</td>
+                                            <td>{{$record->serial}}</td>
+                                            <td>{{$record->student->name}} - {{$record->student->eduCenter->name}}</td>
+                                            <td>{{$record->test_center}}</td>
+                                            <td>{{$record->eduCenter->name}}</td>
+                                            <td>{{$record->user->name}}</td>
+                                            <td> @if($record->status === 0 ) Booked @elseif ($record->status === 1) Paid @elseif ($record->status === 2) Booked & Paid @endif </td>
+                                            <td>{{count($record->payments)}}</td>
                                             <td>
                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="true">Action</button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												    <a class="dropdown-item" href="{{route('banks.edit', $record->id)}}"><i class="fa fa-edit"></i> Edit</a>
+												    <a class="dropdown-item" href="{{route('registrations.edit', $record->id)}}"><i class="fa fa-edit"></i> Edit</a>
                                                     <a class="dropdown-item" data-toggle="modal" href="#myModal-{{ $record->id }}"><i class="fa fa-trash"></i> Delete</a>
                                                 </div>
                                                     <div class="modal fade" id="myModal-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                     <div class="modal-body">
-                                                    <form role="form" action="{{ route('banks.destroy',$record->id) }}" class="" method="POST">
+                                                    <form role="form" action="{{ route('registrations.destroy',$record->id) }}" class="" method="POST">
                                                     <input name="_method" type="hidden" value="DELETE">
                                                     {{ csrf_field() }}
                                                     <p>are you sure</p>

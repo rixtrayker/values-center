@@ -1,7 +1,6 @@
 @extends('admin.layout.dashboard')
 
 @section('content')
-
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
@@ -12,7 +11,7 @@
     <div class="card-body">
 
                         <!--begin::Form-->
-                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('banks.update',$bank->id) }}" enctype="multipart/form-data">
+                        <form class="kt-form kt-form--label-left" id="kt_form_1" method="post"  action="{{ route('students.update',$student->id) }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                             @method('PUT')
                             <div class="kt-portlet__body">
@@ -20,20 +19,38 @@
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Name : </label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control m-input" name="name" value="{{$bank->name}}" />
+										<input type="text" class="form-control m-input" name="name" value="{{$student->name}}" />
 									</div>
 
 								</div>
 
                                 <div class="form-group m-form__group row">
-									<label class="col-lg-2 col-form-label">Initial Balance : </label>
+									<label class="col-lg-2 col-form-label">Mobile : </label>
 									<div class="col-lg-4">
-										<input type="number" class="form-control m-input" name="init_balance" value="{{$bank->init_balance}}" />
+										<input type="number" class="form-control m-input" name="mobile" value="{{$student->mobile}}" />
 									</div>
-
 								</div>
 
-
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Center : </label>
+									<div class="col-lg-4">
+                                        <select name="edu_center_id"class="form-control m-input">
+                                            @foreach ($centers as $center)
+                                            <option value="{{$center->id}}" @if($student->edu_center_id == $center->id ) selected @endif>{{$center->name}}</option>
+                                            @endforeach
+                                        </select>
+									</div>
+								</div>
+                                <div class="form-group m-form__group row">
+									<label class="col-lg-2 col-form-label">Grade : </label>
+									<div class="col-lg-4">
+                                        <select name="grade"class="form-control m-input">
+                                            @for($i=1; $i<=12;$i++)
+                                            <option value="{{$i}}" @if($student->grade == $i ) selected @endif>{{$i}}</option>
+                                            @endfor
+                                        </select>
+									</div>
+								</div>
 
                                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-xl"></div>
 
