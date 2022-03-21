@@ -108,7 +108,7 @@
 
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Document image: </label>
-                                    <a class="" href="{{route('private-images',$payment->image)}}"><i class="fa fa-eye"></i> &nbsp;</a>
+                                    <a target=”_blank” class="btn btn-large btn-success" href="{{route('private-images',$payment->image)}}"><i class="fa fa-eye"></i> &nbsp;view</a>
 
 									<div class="col-lg-4">
 										<input type="file" class="form-control m-input" name="image_file"  />
