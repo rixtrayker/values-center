@@ -15,6 +15,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\VCashController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/private-image/{image}', function ($image) {
+    $file = Storage::path('payment-images/'.$image);
+    return response()->file($file);
+})->name('private-images');
 Route::get('/admin', function () {
     return view('admin.admin-home');
 })->name('admin');

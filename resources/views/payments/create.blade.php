@@ -60,7 +60,7 @@
                                         <select id="vf_acc_id" name="vf_acc_id" class="form-control m-input">
                                             <option value="">None</option>
                                             @foreach ( \App\Models\VCash::all() as $acc )
-                                                <option value="{{$acc->id}}">{{$acc->name}}</option>
+                                                <option value="{{$acc->id}}">{{$acc->number}}</option>
                                             @endforeach
                                         </select>
 									</div>
@@ -103,7 +103,7 @@
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Document image: </label>
 									<div class="col-lg-4">
-										<input type="file" class="form-control m-input" name="image"  />
+										<input type="file" class="form-control m-input" name="image_file"  />
 									</div>
 								</div>
 
