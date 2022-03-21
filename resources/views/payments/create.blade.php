@@ -35,17 +35,18 @@
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Paying method : </label>
 									<div class="col-lg-4">
-                                        <select name="paying_method" class="form-control m-input">
+                                        <select id="paying_method" name="paying_method" class="form-control m-input">
+                                            <option value="">Please choose one ..</option>
                                             <option value="cash">Cash</option>
                                             <option value="vodafone_cash">Vodafone</option>
                                             <option value="bank">Bank</option>
                                         </select>
 									</div>
 								</div>
-                                <div class="form-group m-form__group row">
+                                <div id="bank_id_div" style="display: none;" class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">if bank select one : </label>
 									<div class="col-lg-4">
-                                        <select name="bank_id" class="form-control m-input">
+                                        <select id="bank_id" name="bank_id" class="form-control m-input">
                                             <option value="">None</option>
                                             @foreach ( \App\Models\Bank::all() as $bank )
                                                 <option value="{{$bank->id}}">{{$bank->name}}</option>
@@ -53,10 +54,10 @@
                                         </select>
 									</div>
 								</div>
-                                <div class="form-group m-form__group row">
+                                <div id="vf_acc_id_div" style="display: none;" class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">if vodafone select number : </label>
 									<div class="col-lg-4">
-                                        <select name="vf_acc_id" class="form-control m-input">
+                                        <select id="vf_acc_id" name="vf_acc_id" class="form-control m-input">
                                             <option value="">None</option>
                                             @foreach ( \App\Models\VCash::all() as $acc )
                                                 <option value="{{$acc->id}}">{{$acc->name}}</option>
@@ -65,9 +66,9 @@
 									</div>
 								</div>
 
-                                <div class="form-group row">
+                                <div id="is_vf_trans_div" style="display: none;" class="form-group row">
                                     <label class="col-form-label pt-2 inline col-lg-2">is vodafone transaction : </label>
-                                    <div class="radio-inline col-lg-4">
+                                    <div id="is_vf_trans" class="radio-inline col-lg-4">
                                         <label class="radio">
                                             <input type="radio" value="0" name="is_vf_trans"/>
                                             <span></span>
@@ -131,3 +132,28 @@
 @endsection
 
 
+@section('js')
+<script>
+        $('#paying_method').change(
+            function(){
+                if($(this).val() == 'vodafone_cash')
+                {
+                    $('#is_vf_trans_div').show();
+                    $('#vf_acc_id_div').show();
+                    $('#bank_id_div').hide();
+                }
+                else if($(this).val() == 'bank' ){
+                    $('#is_vf_trans_div').hide();
+                    $('#vf_acc_id_div').hide();
+                    $('#bank_id_div').show();
+                }else {
+                    $('#is_vf_trans_div').hide();
+                    $('#vf_acc_id_div').hide();
+                    $('#bank_id_div').hide();
+                }
+
+            }
+        );
+</script>
+
+@endsection

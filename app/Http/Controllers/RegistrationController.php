@@ -100,12 +100,6 @@ class RegistrationController extends Controller
      */
     public function update(Request $request, Registration $registration)
     {
-        if ($request->serial) {
-            $request->remove('serial');
-        }
-        if ($request->user_id) {
-            $request->remove('user_id');
-        }
         $validator = Validator::make($request->except('_token'), [
             // 'serial' => 'required|string',
             'test_center' => 'required|string',
@@ -119,7 +113,7 @@ class RegistrationController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $registration->update($request->except('_token'));
+        $registration->update($request->except(['_token','serial','user_id']));
         return redirect()->route('registrations.index');
     }
 

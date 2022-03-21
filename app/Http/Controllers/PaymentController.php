@@ -50,6 +50,31 @@ class PaymentController extends Controller
         $request['serial'] = '0';
         $request['user_id'] = Auth::id();
 
+        if ($request->paying_method == 'vodafone_cash') {
+            if ($request->bank_id) {
+                $request['bank_id'] = null;
+            }
+        }
+        if ($request->paying_method == 'bank') {
+            if ($request->is_vf_trans) {
+                $request['vf_acc_id'] = null;
+            }
+            if ($request->is_vf_trans) {
+                $request['vf_acc_id'] = null;
+            }
+        }
+        if ($request->paying_method == 'cash') {
+            if ($request->bank_id) {
+                $request['bank_id'] = null;
+            }
+            if ($request->is_vf_trans) {
+                $request['vf_acc_id'] = null;
+            }
+            if ($request->is_vf_trans) {
+                $request['vf_acc_id'] = null;
+            }
+        }
+
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'reason' => 'required|string',
@@ -112,12 +137,6 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        if ($request->serial) {
-            $request->remove('serial');
-        }
-        if ($request->user_id) {
-            $request->remove('user_id');
-        }
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required|string',
             'reason' => 'required|string',
@@ -140,7 +159,7 @@ class PaymentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $payment->update($request->except('_token'));
+        $payment->update($request->except(['_token','serial','user_id']));
         return redirect()->route('payments.index');
     }
 

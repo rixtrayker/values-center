@@ -95,9 +95,6 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        if ($request->serial) {
-            $request->remove('serial');
-        }
         $validator = Validator::make($request->except('_token'), [
             'name' => 'required|string',
             'mobile' => 'required',
@@ -109,7 +106,7 @@ class StudentController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $student->update($request->except('_token'));
+        $student->update($request->except(['_token','serial']));
         return redirect()->route('students.index');
     }
 
