@@ -104,14 +104,7 @@ class AuthenticatesController extends Controller
      */
     public function update(Request $request, Authenticates $authenticates)
     {
-        if ($request->serial) {
-            $request->remove('serial');
-        }
-        if ($request->user_id) {
-            $request->remove('user_id');
-        }
         $validator = Validator::make($request->except('_token'), [
-            // 'serial' => 'required|string',
             'ACT1' => 'nullable|integer',
             'ACT2' => 'nullable|integer',
             'EST1' => 'nullable|integer',
@@ -129,7 +122,7 @@ class AuthenticatesController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $authenticates->update($request->except('_token'));
+        $authenticates->update($request->except(['_token','serial','user_id']));
         return redirect()->route('authenticates.index');
     }
 

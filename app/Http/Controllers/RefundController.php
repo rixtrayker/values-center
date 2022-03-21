@@ -94,12 +94,6 @@ class RefundController extends Controller
      */
     public function update(Request $request, Refund $refund)
     {
-        if ($request->serial) {
-            $request->remove('serial');
-        }
-        if ($request->user_id) {
-            $request->remove('user_id');
-        }
         $validator = Validator::make($request->except('_token'), [
             'payment_id' => 'required|exists:payments,id',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',//|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
@@ -111,7 +105,7 @@ class RefundController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $refund->update($request->except('_token'));
+        $refund->update($request->except(['_token','serial','user_id']));
         return redirect()->route('refunds.index');
     }
 

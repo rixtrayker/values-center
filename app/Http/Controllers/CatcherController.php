@@ -99,18 +99,6 @@ class CatcherController extends Controller
      */
     public function update(Request $request, Catcher $catcher)
     {
-        if ($request->serial) {
-            $request->remove('serial');
-        }
-        if ($request->notes) {
-            $request->remove('notes');
-        }
-        if ($request->user_id) {
-            $request->remove('user_id');
-        }
-        if ($request->admin_id) {
-            $request->remove('admin_id');
-        }
         $validator = Validator::make($request->except('_token'), [
             'serial' => 'required',
             'admin_name' => 'required',
@@ -126,7 +114,7 @@ class CatcherController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        $catcher->update($request->except('_token'));
+        $catcher->update($request->except(['_token','serial','user_id','admin_id','notes']));
         return redirect()->route('catchers.index');
     }
 

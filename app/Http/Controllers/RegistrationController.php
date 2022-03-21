@@ -101,7 +101,6 @@ class RegistrationController extends Controller
     public function update(Request $request, Registration $registration)
     {
         $validator = Validator::make($request->except('_token'), [
-            // 'serial' => 'required|string',
             'test_center' => 'required|string',
             'student_id' => 'required|exists:students,id',
             'edu_center_id' => 'required|exists:edu_centers,id',
