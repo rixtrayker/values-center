@@ -57,7 +57,11 @@
                                             <td>{{$record->user->name}}</td>
                                             <td>{{$record->eduCenter->name??''}}</td>
                                             <td>{{$record->paying_method}}</td>
-                                            <td>{{$record->status}}</td>
+                                            <td>
+                                                @if($record->status == 0 ) Pending @endif
+                                                @if($record->status == 1 ) Done @endif
+                                                @if($record->status == 2 ) Refunded @endif
+                                            </td>
                                             <td>{{$record->created_at->format('Y-m-d')}}</td>
                                             <td>
                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"

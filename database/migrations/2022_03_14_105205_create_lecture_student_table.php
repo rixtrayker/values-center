@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('student_id')->constrained();
             $table->foreignId('lecture_id')->constrained();
+            $table->foreignId('paymenet_id')->constrained();
             $table->tinyInteger('status')->default(0);
             // 0 nothing 1 alert to pay
             $table->timestamps();

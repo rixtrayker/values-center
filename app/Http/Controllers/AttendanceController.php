@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,6 +32,13 @@ class AttendanceController extends Controller
     public function create()
     {
         return view('attendances.create');
+    }
+
+    public function takeAttendance(Request $request)
+    {
+        $lecture = Lecture::find($request->lecture_id);
+        // $students = Lecture::find($request->lecture_id);
+        return view('attendances.create', compact(['lecture',]));
     }
 
     /**
@@ -107,5 +115,9 @@ class AttendanceController extends Controller
     {
         $attendance->delete();
         return redirect()->route('attendances.index');
+    }
+    public function postAttendance(Request $request)
+    {
+        //
     }
 }

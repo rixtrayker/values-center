@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->string('paying_method'); // vc - bank - cash
             $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('student_lecture_id')->nullable()->constrained('lecture_student'); // not necessary
             $table->foreignId('edu_center_id')->nullable()->constrained();
             $table->foreignId('vf_acc_id')->nullable()->constrained('v_cashes');
             $table->boolean('is_vf_trans')->default(0); //transfering money vs (deposit or withdraw )

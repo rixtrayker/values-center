@@ -39,9 +39,9 @@ class Payment extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function lectures()
+    public function studentLecture()
     {
-        return $this->belongsToMany(Lecture::class);
+        return $this->hasMany(LectureStudent::class);
     }
 
     public function refund()

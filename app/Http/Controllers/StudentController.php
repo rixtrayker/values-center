@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EduCenter;
+use App\Models\Lecture;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -120,5 +121,20 @@ class StudentController extends Controller
     {
         $student->delete();
         return redirect()->route('students.index');
+    }
+
+    public function attachLecturesGet()
+    {
+        $students = Student::pluck('id', 'name');
+        $lectures = Lecture::with('course')->pluck('id', 'course.name');
+        dd($lectures);
+    }
+
+    public function attachLecturesPost(Request $request, Student $student)
+    {
+        //$user->roles()->sync([1 => ['expires' => true], 2, 3]);
+        // [ 1=> ['status' => 1, 'payment_id' => 2 ] , 2 ...... ]
+        //req.   status |  payment_id
+        $student->lectures()->sync($request->lectures);
     }
 }

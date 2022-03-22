@@ -35,6 +35,7 @@ Route::get('/private-image/{image}', function ($image) {
     $file = Storage::path('payment-images/'.$image);
     return response()->file($file);
 })->name('private-images');
+
 Route::get('/admin', function () {
     return view('admin.admin-home');
 })->name('admin');
@@ -42,6 +43,13 @@ Route::get('/admin', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::post('student-lecture/{student}', [StudentController::class, 'attachLecturesPost'])->name('student-lecture.post');
+Route::post('student-lecture-page', [StudentController::class, 'attachLecturesGet'])->name('student-lecture-page');
+Route::get('student-lecture', [StudentController::class, 'chooseStudent'])->name('student-lecture.get');
+
+Route::post('take-attendance', [AttendanceController::class, 'takeAttendance'])->name('take-attendance');
+Route::post('post-attendance', [AttendanceController::class, 'postAttendance'])->name('post-attendance');
 
 // admin
 Route::resource('educenters', EduCenterController::class);
