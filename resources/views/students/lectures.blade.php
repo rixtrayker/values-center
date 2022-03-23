@@ -6,20 +6,30 @@
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon"><i class="fa fa-user text-primary"></i></span>
-            <h3 class="card-label">Attendance</h3>
+            <h3 class="card-label">Students Lectures</h3>
         </div>
 
     </div>
     <div class="card-body">
 
 
-        <form action="{{route('take-attendance')}}" method="POST">
+        <form action="{{route('student.lecture.post')}}" method="POST">
             @csrf
+            <div class="form-group m-form__group row">
+                <label class="col-lg-2 col-form-label">Select student : </label>
+                <div class="col-lg-4">
+                    <select class="form-control m-input select2" name="student_id" id="student_id">
+                        @foreach ($students as $student )
+                            <option value="{{$student->id}}">{{$student->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="form-group m-form__group row">
                 <label class="col-lg-2 col-form-label">Select lecture : </label>
                 <div class="col-lg-4">
-                    <select class="form-control m-input select2" name="lecture_id" id="lecture_id">
-                        @foreach (\App\Models\Lecture::all() as $lecture )
+                    <select class="form-control m-input select2" name="lecture_id" id="lecture_id" multiple>
+                        @foreach ($lectures as $lecture )
                             <option value="{{$lecture->id}}">{{$lecture->course->name}} / {{$lecture->month}}</option>
                         @endforeach
                     </select>
@@ -107,6 +117,9 @@
 <script>
     $('#lecture_id').select2({
         'placeholder' : 'select a lecture'
+    });
+    $('#student_id').select2({
+        'placeholder' : 'select a student'
     });
 </script>
 

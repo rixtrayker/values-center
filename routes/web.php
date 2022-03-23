@@ -44,12 +44,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::post('student-lecture/{student}', [StudentController::class, 'attachLecturesPost'])->name('student-lecture.post');
-Route::post('student-lecture-page', [StudentController::class, 'attachLecturesGet'])->name('student-lecture-page');
-Route::get('student-lecture', [StudentController::class, 'chooseStudent'])->name('student-lecture.get');
+Route::get('student-lecture', [StudentController::class, 'updateStudentLectures'])->name('students.lecture.get');
+Route::get('student-lecture/{student}', [StudentController::class, 'chooseStudent'])->name('student.lecture.get');
+Route::post('student-lecture/{student?}', [StudentController::class, 'attachLecturesPost'])->name('student.lecture.post');
 
-Route::post('take-attendance', [AttendanceController::class, 'takeAttendance'])->name('take-attendance');
-Route::post('post-attendance', [AttendanceController::class, 'postAttendance'])->name('post-attendance');
+// Route::post('student-lecture-next', [StudentController::class, 'attachLecturesGet'])->name('student-lecture-page');
+
+Route::post('post-attendance', [AttendanceController::class, 'postAttendance'])->name('post.attendance');
+Route::post('take-attendance', [AttendanceController::class, 'takeAttendance'])->name('take.attendance');
 
 // admin
 Route::resource('educenters', EduCenterController::class);

@@ -123,11 +123,15 @@ class StudentController extends Controller
         return redirect()->route('students.index');
     }
 
-    public function attachLecturesGet()
+    public function chooseStudent()
     {
-        $students = Student::pluck('id', 'name');
-        $lectures = Lecture::with('course')->pluck('id', 'course.name');
-        dd($lectures);
+        $students = Student::all();
+        $lectures = Lecture::all();
+        return view('students.lectures', compact('students', 'lectures'));
+    }
+    public function updateStudentLectures(Student $student)
+    {
+        return view('students.update-lectures', compact('student'));
     }
 
     public function attachLecturesPost(Request $request, Student $student)

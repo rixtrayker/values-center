@@ -13,7 +13,7 @@
     <div class="card-body">
 
 
-        <form action="{{route('take-attendance')}}" method="POST">
+        <form action="{{route('post.attendance')}}" method="POST">
             @csrf
             <div class="form-group m-form__group row">
                 <label class="col-lg-2 col-form-label">Select lecture : </label>

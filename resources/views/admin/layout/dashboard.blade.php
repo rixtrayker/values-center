@@ -109,7 +109,7 @@
                             Dashboard
                         </a>
                     </h4>
-                    
+
                     <!--end::Logo-->
 
                     <!--begin::Toggle-->
@@ -341,6 +341,12 @@
                 <a href="{{route('students.index')}}" class="menu-link menu-toggle">
                     <i class="menu-bullet menu-bullet-dot"><span></span></i>
                     <span class="menu-text">List</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="{{route('students.lecture.get')}}" class="menu-link menu-toggle">
+                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                    <span class="menu-text">Add student lecture</span>
                 </a>
             </li>
 

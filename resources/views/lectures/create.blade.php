@@ -20,9 +20,9 @@
                                 <div class="form-group m-form__group row">
 									<label class="col-lg-2 col-form-label">Course : </label>
 									<div class="col-lg-4">
-                                        <select name="course_id"class="form-control m-input">
+                                        <select id="course_id" name="course_id"class="form-control m-input">
                                             @foreach ($courses as $course)
-                                            <option value="{{$course->id}}">{{$course->name}}</option>
+                                            <option value="{{$course->id}}">{{$course->name}} - {{$course->teacher->name}} </option>
                                             @endforeach
                                         </select>
 									</div>
@@ -84,3 +84,11 @@
 @endsection
 
 
+
+@section('js')
+<script>
+    $('#course_id').select2({
+        'placeholder' : 'select a course'
+    });
+</script>
+@endsection

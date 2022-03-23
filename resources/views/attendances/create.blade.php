@@ -39,8 +39,9 @@
 
 							</tbody>
                         </table>
+                        <input type="hidden" name="lecture_id" value="{{$lecture->id}}">
                         <div class="text-center">
-                            <button class="btn btn-warning delete-btn">
+                            <button class="btn btn-warning save-btn">
                                 Save
                             </button>
                         </div>
@@ -101,7 +102,7 @@
         });
 
 
-        $('.delete-btn').on("click", function() {
+        $('.save-btn').on("click", function() {
             var rows = table.rows( '.selected' );
             var arr = [];
             table.rows('.selected').data().each(function(e){
@@ -114,18 +115,18 @@
             });
             // alert(arr.toString());
             $.ajax({
-                url: "{{route('take-attendance')}}",
-                type: 'delete',
+                url: "{{route('take.attendance')}}",
+                type: 'post',
                 data: {'arr':arr.toString()},
                 success: function(response){
                     // setPrograms(response);
-                    swal.fire("deleted!", 'Success Delete', 'success');
+                    swal.fire("Saved!", 'Success save', 'success');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     // alert(thrownError);
             }
             });
-            rows.remove().draw();
+            // rows.remove().draw();
         });
     });
 

@@ -34,12 +34,6 @@ class AttendanceController extends Controller
         return view('attendances.create');
     }
 
-    public function takeAttendance(Request $request)
-    {
-        $lecture = Lecture::find($request->lecture_id);
-        // $students = Lecture::find($request->lecture_id);
-        return view('attendances.create', compact(['lecture',]));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -118,6 +112,14 @@ class AttendanceController extends Controller
     }
     public function postAttendance(Request $request)
     {
-        //
+        $lecture = Lecture::find($request->lecture_id);
+        return view('attendances.create', compact(['lecture',]));
+    }
+
+    public function takeAttendance(Request $request)
+    {
+        $lecture = Lecture::find($request->lectrue_id);
+        dd($request->arr);
+        return $lecture->students()->sync($request->arr);
     }
 }
